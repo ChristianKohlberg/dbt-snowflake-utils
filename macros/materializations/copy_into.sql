@@ -31,7 +31,7 @@
 
         {%- call statement() -%}
             CREATE OR REPLACE TABLE {{ target_relation }} AS (
-                {{ sql ~ '/' ~ invocation_id }}
+                {{ sql ~ '/' ~ invocation_id }} (file_format => '{{ file_format }}')
             )
         {%- endcall -%}
     {%- endif %}
@@ -42,7 +42,7 @@
             {{ sql }}
         )
         {{ 'pattern = ' ~ pattern if pattern }}
-        {{ 'file_format = ' ~ file_format if file_format }}
+        {{ 'file_format = (format_name = ' ~ file_format ~ ')' if file_format }}
         {{ 'LOAD_UNCERTAIN_FILES = TRUE' if full_refresh_mode }}
     {% endcall %}
 
