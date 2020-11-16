@@ -41,7 +41,7 @@
         FROM (
             {{ sql }}
         )
-        {{ 'pattern = ' ~ pattern if pattern }}
+        {{ 'pattern = ''' ~ pattern ~ '''' if pattern }}
         {{ 'file_format = (format_name = ' ~ file_format ~ ')' if file_format }}
         {{ 'LOAD_UNCERTAIN_FILES = TRUE' if full_refresh_mode }}
     {% endcall %}
